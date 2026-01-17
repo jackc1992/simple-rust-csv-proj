@@ -1,5 +1,15 @@
 [workspace]
+resolver = "3"
 members = [
     "app",
     "lib"
 ]
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+csv = "1.4"
+rust_decimal = "1.40"
+thiserror = "2"
+clap = { version = "4.5", features = ["derive"]}
+
+payment_engine = { path = "./lib"}

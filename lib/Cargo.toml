@@ -1,9 +1,10 @@
 [package]
-name = "lib"
+name = "payment_engine"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-serde = { version = "1", features = ["derive"] }
-csv = "1.4"
-rust_decimal = "1.40"
+serde = { workspace = true }
+csv = { workspace = true }
+rust_decimal = { workspace = true }
+thiserror = { workspace = true }
