@@ -23,7 +23,6 @@ fn main() -> Result<(), Box<dyn Error>> {
     let file = File::open(cli.path)?;
     let reader = BufReader::new(file);
     let output = stdout();
-    // pretend we care about high performance here
     let handle = output.lock();
     let writer = BufWriter::new(handle);
 

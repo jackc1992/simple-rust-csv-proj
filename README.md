@@ -33,14 +33,11 @@ write to stdout.
 
 ## Design trade off
 
-I'm not sure some of these decisions make sense; for instance during a dispute I've made it
-possible to have a negative available balance. I think this is probably what would happen.
-
 From a software tradeoff, it was tempting to consider some opportunities to maximise throughput.
 One such option was to not use hashmaps at all for clients, and rather to just allocate all 2 ^ 16
 clients as arrays. I could do some struct of arrays style thing here, using bit vectors to
-determine whether the client was in use. I projected 4mb of data cost. Saner minds prevailed, a
-hashmap was used.
+determine whether the client was in use. I projected 4mb of data cost. A hashmap for this task
+seemed like a reasonable choice to prioritise code simplicity
 
 If I wanted to spend significantly more time on this the storage for transactions would be put into
 a database. I did seriously consider using sled or fjall here, but I'm not convinced this is worth
