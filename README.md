@@ -23,3 +23,5 @@ logic only impacts past deposits
 some sort to set a hard limit on memory usage.
 
 * Custom errors!
+
+* No ai was used to generate code
