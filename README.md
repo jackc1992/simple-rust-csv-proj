@@ -28,6 +28,9 @@ some sort to set a hard limit on memory usage.
 
 * Simple unit tests in lib.rs and bank_engine.rs
 
+* Logging via eprintln. This was purely done to keep things simple as well as respect the need to
+write to stdout.
+
 ## Design trade off
 
 I'm not sure some of these decisions make sense; for instance during a dispute I've made it
