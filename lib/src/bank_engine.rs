@@ -13,6 +13,8 @@ pub trait TransactionStore {
     fn get_tx_info(&mut self, tx_id: TransactionID) -> Result<&mut Deposit, AccountError>;
 }
 
+// Could be used for test data; in a real app a database would be used to keep memory at manageable
+// levels. As currently stands, given a large enough dataset this would OOM.
 #[derive(Default)]
 pub struct InMemoryStore {
     data: HashMap<TransactionID, Deposit>,
