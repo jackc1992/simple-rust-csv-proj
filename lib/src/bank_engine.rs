@@ -173,3 +173,54 @@ impl<Store: TransactionStore> BankEngine<Store> {
         })
     }
 }
+
+#[cfg(test)]
+mod tests {
+
+    use super::*;
+
+    #[test]
+    fn test_resolve_logic() {
+        let store = InMemoryStore::default();
+        let mut bank_engine = BankEngine::new(store);
+        let t1 = Transaction::Deposit {
+            client_id: ClientID(1),
+            tx_id: TransactionID(1),
+            amount: 100.into(),
+        };
+
+        let t2 = Transaction::Dispute {
+            client_id: ClientID(1),
+            tx_id: TransactionID(1),
+        };
+
+        let t3 = Transaction::Resolve {
+            client_id: ClientID(1),
+            tx_id: TransactionID(1),
+        };
+
+        let _ = bank_engine.process_transaction(t1);
+
+        let _ = bank_engine.process_transaction(t2);
+
+        {
+            let client = bank_engine.clients.get(&ClientID(1)).unwrap();
+            let client_target = Client {
+                held: 100.into(),
+                total: 100.into(),
+                locked: false,
+            };
+            assert_eq!(client, &client_target);
+        }
+
+        let _ = bank_engine.process_transaction(t3);
+
+        let client = bank_engine.clients.get(&ClientID(1)).unwrap();
+        let client_target = Client {
+            held: 0.into(),
+            total: 100.into(),
+            locked: false,
+        };
+        assert_eq!(client, &client_target);
+    }
+}

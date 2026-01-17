@@ -2,7 +2,7 @@ use rust_decimal::Decimal;
 
 use crate::errors::AccountError;
 
-#[derive(Default)]
+#[derive(Default, Debug, PartialEq)]
 pub struct Client {
     pub held: Decimal,
     pub total: Decimal,

@@ -121,4 +121,21 @@ dispute,    2,      1,
 
         assert!(result.contains("1,100,0,100,false"));
     }
+
+    #[test]
+    fn test_dispute_and_resolve() {
+        let input = "\
+type,       client, tx, amount
+deposit,    1,      1,  100.0
+dispute,    1,      1,
+resolve,    1,      1,
+";
+        let mut output = Vec::new();
+
+        process_transactions(input.as_bytes(), &mut output).expect("Should not fail");
+
+        let result = String::from_utf8(output).unwrap();
+
+        assert!(result.contains("1,100,0,100,false"));
+    }
 }

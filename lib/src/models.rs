@@ -4,7 +4,7 @@ use rust_decimal::Decimal;
 use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Debug, Hash, PartialEq, Eq, Clone, Copy, Serialize)]
-pub struct ClientID(u16);
+pub struct ClientID(pub u16);
 
 impl Display for ClientID {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -13,7 +13,7 @@ impl Display for ClientID {
 }
 
 #[derive(Deserialize, Debug, Hash, PartialEq, Eq, Clone, Copy)]
-pub struct TransactionID(u32);
+pub struct TransactionID(pub u32);
 
 impl Display for TransactionID {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

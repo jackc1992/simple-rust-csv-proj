@@ -25,3 +25,5 @@ some sort to set a hard limit on memory usage.
 * Custom errors!
 
 * No ai was used to generate code
+
+* Simple unit tests in lib.rs and bank_engine.rs
