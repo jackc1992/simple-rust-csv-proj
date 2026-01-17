@@ -27,3 +27,25 @@ some sort to set a hard limit on memory usage.
 * No ai was used to generate code
 
 * Simple unit tests in lib.rs and bank_engine.rs
+
+## Design trade off
+
+I'm not sure some of these decisions make sense; for instance during a dispute I've made it
+possible to have a negative available balance. I think this is probably what would happen.
+
+From a software tradeoff, it was tempting to consider some opportunities to maximise throughput.
+One such option was to not use hashmaps at all for clients, and rather to just allocate all 2 ^ 16
+clients as arrays. I could do some struct of arrays style thing here, using bit vectors to
+determine whether the client was in use. I projected 4mb of data cost. Saner minds prevailed, a
+hashmap was used.
+
+If I wanted to spend significantly more time on this the storage for transactions would be put into
+a database. I did seriously consider using sled or fjall here, but I'm not convinced this is worth
+the effort for a couple hour take home.
+
+I seriously considered making the lib functions async in some manner. One of the options that was
+appealing was to use tokio, and use a dashmap, another was to use io_uring and shard on client_id,
+and minimise inter thread communication and locks.
+
+
+Please enjoy.
